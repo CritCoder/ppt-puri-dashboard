@@ -525,6 +525,22 @@ const TrafficFlow = () => {
     src: videoSources[0],
     label: 'Grand Road'
   });
+  
+  // Add CSS animation for striped progress bars
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes progress-stripes {
+        0% { background-position: 0 0; }
+        100% { background-position: 20px 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   // Add the stats state
   const [locationStats] = useState({
@@ -953,9 +969,12 @@ const TrafficFlow = () => {
                 </div>
                 <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-yellow-500 rounded-full"
+                    className="h-full bg-yellow-500 rounded-full animate-pulse"
                     style={{ 
-                      width: `${(item.count / Math.max(...locationStats.laneViolations.map(i => i.count))) * 100}%` 
+                      width: `${(item.count / Math.max(...locationStats.laneViolations.map(i => i.count))) * 100}%`,
+                      background: 'linear-gradient(45deg, #eab308 25%, transparent 25%, transparent 50%, #eab308 50%, #eab308 75%, transparent 75%, transparent)',
+                      backgroundSize: '20px 20px',
+                      animation: 'progress-stripes 1s linear infinite'
                     }}
                   />
                 </div>
@@ -981,9 +1000,12 @@ const TrafficFlow = () => {
                 </div>
                 <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-red-500 rounded-full"
+                    className="h-full bg-red-500 rounded-full animate-pulse"
                     style={{ 
-                      width: `${(item.count / Math.max(...locationStats.wrongWay.map(i => i.count))) * 100}%` 
+                      width: `${(item.count / Math.max(...locationStats.wrongWay.map(i => i.count))) * 100}%`,
+                      background: 'linear-gradient(45deg, #ef4444 25%, transparent 25%, transparent 50%, #ef4444 50%, #ef4444 75%, transparent 75%, transparent)',
+                      backgroundSize: '20px 20px',
+                      animation: 'progress-stripes 1s linear infinite'
                     }}
                   />
                 </div>
@@ -1009,9 +1031,12 @@ const TrafficFlow = () => {
                 </div>
                 <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-orange-500 rounded-full"
+                    className="h-full bg-orange-500 rounded-full animate-pulse"
                     style={{ 
-                      width: `${(item.count / Math.max(...locationStats.overspeeding.map(i => i.count))) * 100}%` 
+                      width: `${(item.count / Math.max(...locationStats.overspeeding.map(i => i.count))) * 100}%`,
+                      background: 'linear-gradient(45deg, #f97316 25%, transparent 25%, transparent 50%, #f97316 50%, #f97316 75%, transparent 75%, transparent)',
+                      backgroundSize: '20px 20px',
+                      animation: 'progress-stripes 1s linear infinite'
                     }}
                   />
                 </div>
@@ -1037,9 +1062,12 @@ const TrafficFlow = () => {
                 </div>
                 <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-purple-500 rounded-full"
+                    className="h-full bg-purple-500 rounded-full animate-pulse"
                     style={{ 
-                      width: `${(item.count / Math.max(...locationStats.accidents.map(i => i.count))) * 100}%` 
+                      width: `${(item.count / Math.max(...locationStats.accidents.map(i => i.count))) * 100}%`,
+                      background: 'linear-gradient(45deg, #a855f7 25%, transparent 25%, transparent 50%, #a855f7 50%, #a855f7 75%, transparent 75%, transparent)',
+                      backgroundSize: '20px 20px',
+                      animation: 'progress-stripes 1s linear infinite'
                     }}
                   />
                 </div>

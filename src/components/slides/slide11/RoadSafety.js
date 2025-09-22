@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaCar, FaExclamationTriangle, FaCamera, FaRoad, FaTachometerAlt, FaUsers, FaTools, FaCloudRain } from 'react-icons/fa';
 import { MdWarning, MdDirectionsCarFilled, MdPeople, MdTraffic } from 'react-icons/md';
 import ResourceMap from './components/ResourceMap';
@@ -11,6 +11,22 @@ const RoadSafety = () => {
     accidents: { current: 1, total: 7, change: -1 },
     anpr: { current: 425, total: 3245, change: +45 }
   });
+  
+  // Add CSS animation for striped progress bars
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes progress-stripes {
+        0% { background-position: 0 0; }
+        100% { background-position: 20px 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const [locationStats] = useState({
     laneViolations: [
@@ -288,8 +304,13 @@ const RoadSafety = () => {
                     </div>
                     <div className="w-full bg-gray-800/40 h-2 rounded-full overflow-hidden">
                       <div 
-                        className={`h-full rounded-full ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
-                        style={{ width: `${(item.count / locationStats.laneViolations[0].count) * 100}%` }}
+                        className={`h-full rounded-full animate-pulse ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
+                        style={{ 
+                          width: `${(item.count / locationStats.laneViolations[0].count) * 100}%`,
+                          background: `linear-gradient(45deg, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 25%, transparent 25%, transparent 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 75%, transparent 75%, transparent)`,
+                          backgroundSize: '20px 20px',
+                          animation: 'progress-stripes 1s linear infinite'
+                        }}
                       />
                     </div>
                   </div>
@@ -314,8 +335,13 @@ const RoadSafety = () => {
                     </div>
                     <div className="w-full bg-gray-800/40 h-2 rounded-full overflow-hidden">
                       <div 
-                        className={`h-full rounded-full ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
-                        style={{ width: `${(item.count / locationStats.wrongWay[0].count) * 100}%` }}
+                        className={`h-full rounded-full animate-pulse ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
+                        style={{ 
+                          width: `${(item.count / locationStats.wrongWay[0].count) * 100}%`,
+                          background: `linear-gradient(45deg, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 25%, transparent 25%, transparent 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 75%, transparent 75%, transparent)`,
+                          backgroundSize: '20px 20px',
+                          animation: 'progress-stripes 1s linear infinite'
+                        }}
                       />
                     </div>
                   </div>
@@ -340,8 +366,13 @@ const RoadSafety = () => {
                     </div>
                     <div className="w-full bg-gray-800/40 h-2 rounded-full overflow-hidden">
                       <div 
-                        className={`h-full rounded-full ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
-                        style={{ width: `${(item.count / locationStats.overspeeding[0].count) * 100}%` }}
+                        className={`h-full rounded-full animate-pulse ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
+                        style={{ 
+                          width: `${(item.count / locationStats.overspeeding[0].count) * 100}%`,
+                          background: `linear-gradient(45deg, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 25%, transparent 25%, transparent 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 75%, transparent 75%, transparent)`,
+                          backgroundSize: '20px 20px',
+                          animation: 'progress-stripes 1s linear infinite'
+                        }}
                       />
                     </div>
                   </div>
@@ -366,8 +397,13 @@ const RoadSafety = () => {
                     </div>
                     <div className="w-full bg-gray-800/40 h-2 rounded-full overflow-hidden">
                       <div 
-                        className={`h-full rounded-full ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
-                        style={{ width: `${(item.count / locationStats.accidents[0].count) * 100}%` }}
+                        className={`h-full rounded-full animate-pulse ${index === 0 ? 'bg-red-500' : index === 1 ? 'bg-orange-500' : 'bg-yellow-500'}`}
+                        style={{ 
+                          width: `${(item.count / locationStats.accidents[0].count) * 100}%`,
+                          background: `linear-gradient(45deg, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 25%, transparent 25%, transparent 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 50%, ${index === 0 ? '#ef4444' : index === 1 ? '#f97316' : '#eab308'} 75%, transparent 75%, transparent)`,
+                          backgroundSize: '20px 20px',
+                          animation: 'progress-stripes 1s linear infinite'
+                        }}
                       />
                     </div>
                   </div>
