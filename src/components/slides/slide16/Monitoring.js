@@ -17,6 +17,12 @@ const Monitoring = () => {
   const [isLive, setIsLive] = useState(true);
   const [selectedCamera, setSelectedCamera] = useState(null);
   
+  // Time series data for charts
+  const [timeSeriesData, setTimeSeriesData] = useState({
+    density: [],
+    flow: []
+  });
+  
   // Comprehensive monitoring data
   const [monitoringData, setMonitoringData] = useState({
     crowd: {
@@ -212,7 +218,7 @@ const Monitoring = () => {
                   <span className="text-sm text-gray-400">Total Crowd</span>
                 </div>
                 <div className="text-2xl font-bold text-white">
-                  {crowdData.total.toLocaleString()}
+                  {monitoringData.crowd.total.toLocaleString()}
                 </div>
               </div>
 
@@ -222,7 +228,7 @@ const Monitoring = () => {
                   <span className="text-sm text-gray-400">Flow Rate</span>
                 </div>
                 <div className="text-2xl font-bold text-white">
-                  {crowdData.flow}/hr
+                  {monitoringData.crowd.flow}/hr
                 </div>
               </div>
             </div>
@@ -243,7 +249,7 @@ const Monitoring = () => {
           <div className="bg-white/5 rounded-lg p-4 border border-white/10">
             <h3 className="text-white font-medium mb-4">Active Alerts</h3>
             <div className="space-y-3">
-              {crowdData.alerts.map(alert => (
+              {monitoringData.crowd.alerts.map(alert => (
                 <div 
                   key={alert.id}
                   className="bg-red-500/10 border border-red-500/20 rounded-lg p-3"
