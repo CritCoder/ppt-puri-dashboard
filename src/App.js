@@ -24,7 +24,7 @@ import Slide21 from './components/slides/Slide21';
 import { GoogleMapsProvider } from './components/GoogleMapsProvider';
 
 function App() {
-  const [currentSlide, setCurrentSlide] = useState(11);
+  const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = 21;
 
   const nextSlide = () => {
