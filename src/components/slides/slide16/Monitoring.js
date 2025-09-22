@@ -17,12 +17,6 @@ const Monitoring = () => {
   const [isLive, setIsLive] = useState(true);
   const [selectedCamera, setSelectedCamera] = useState(null);
   
-  // Time series data for charts
-  const [timeSeriesData, setTimeSeriesData] = useState({
-    density: [],
-    flow: []
-  });
-  
   // Comprehensive monitoring data
   const [monitoringData, setMonitoringData] = useState({
     crowd: {
